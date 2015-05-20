@@ -30,15 +30,24 @@ app.get('/cans/:phrase_id', function (req, res, next) {
 });
 
 app.post('/slack', function (req, res, next) {
-	opener(req.body.text, function (error, reply) {
-		if (error) {
-			next(error);
-		} else if (reply) {
-			res.status(200).json(reply);
-		} else {
-			res.end();
-		}
-	});
+	var text = req.body.text;
+	var trigger = req.body.trigger_word;
+
+	if (text && trigger) {
+		text = text.replace(trigger, '');
+
+		opener(text, function (error, reply) {
+			if (error) {
+				next(error);
+			} else if (reply) {
+				res.status(200).json(reply);
+			} else {
+				res.end();
+			}
+		});
+	} else {
+		res.end();
+	}
 });
 
 app.post('/cans', function (req, res, next) {
