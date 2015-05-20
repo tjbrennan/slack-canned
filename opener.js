@@ -2,14 +2,23 @@ var redis = require('redis');
 var client = redis.createClient();
 
 
-module.exports = function (req, res, next) {
-	var id = req.params.phrase_id;
+module.exports = function (id, callback) {
 
 	client.on('error', function (err) {
-		console.error('Error ' + err);
+		callback(new Error(err));
 	});
 
 	client.get(id, function (err, reply) {
-		res.status(200).send(reply);
+		try {
+			if (reply) {
+				reply = JSON.parse(reply);
+				callback(null, reply);
+			} else {
+				callback();
+			}
+		} catch (e) {
+			callback(e);
+		}
+
 	});
 };
