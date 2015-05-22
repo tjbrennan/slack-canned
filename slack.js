@@ -29,11 +29,19 @@ module.exports = {
 
 
 function merge (object, source) {
-	for (var key in source) {
-		if (source.hasOwnProperty(key)) {
-			object[key] = source[key];
+	var copy = {};
+
+	for (var key in object) {
+		if (object.hasOwnProperty(key)) {
+			copy[key] = object[key];
 		}
 	}
 
-	return object;
+	for (var key in source) {
+		if (source.hasOwnProperty(key)) {
+			copy[key] = source[key];
+		}
+	}
+
+	return copy;
 }
