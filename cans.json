@@ -4,5 +4,19 @@
 	},
 	"mindblown" : {
 		"text" : "http://i.imgur.com/sg017lt.gif"
+	},
+	"ayyy" : {
+		"text" : ":alien: ayyy lmao :alien:",
+		"username" : "ayyyyyy",
+		"icon_emoji" : ":alien:"
+	},
+	"yeeeah" : {
+		"text" : "(•_•)\n( •_•)>⌐■-■\n(⌐■_■)"
+	},
+	"zalgo" : {
+		"text" : "H̱͙̲̹̥̜̣͕̖ͥ͠͝E̦̫̫ͩ̂̿͡͞ͅ ̛̏̈́҉̠͕͉̦̙̮͟Ç̻͓̪͔͖̫͖͇̏̈́͊̓͞ͅO̷̗̰̟͔͎͎̍͒ͣ̐͂̂̚͝Ṁ̨͎̭̲̳̙̻͘Ẻ͓͈̯ͅS̷̙̟̯̖̖̗ͯ͋̔͟"
+	},
+	"doublehack" : {
+		"text" : "http://i.kinja-img.com/gawker-media/image/upload/s--FG3fHddU--/c_fit,fl_progressive,q_80,w_636/19g2zgshh3l60gif.gif"
 	}
 }

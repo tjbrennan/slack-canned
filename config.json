@@ -1,7 +1,7 @@
 {
 	"defaults" : {
-		"username" : "",
-		"icon_emoji" : "",
+		"username" : "moonbot",
+		"icon_emoji" : ":new_moon_with_face:",
 		"icon_url" : ""
 	}
 }
