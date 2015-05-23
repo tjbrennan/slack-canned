@@ -19,7 +19,10 @@
 	"doublehack" : {
 		"text" : "http://i.kinja-img.com/gawker-media/image/upload/s--FG3fHddU--/c_fit,fl_progressive,q_80,w_636/19g2zgshh3l60gif.gif"
 	},
-	"fun" : {
+	"nofun" : {
 		"text" : "https://i.imgur.com/mHVCmXe.jpg"
+	},
+	"dating" : {
+		"text" : "http://i.imgur.com/JAwaxFU.gif"
 	}
 }
