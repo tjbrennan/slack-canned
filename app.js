@@ -1,27 +1,32 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var importer = require('./importer');
-var cans = require('./cans');
-var opener = require('./opener');
-var slack = require('./slack');
+var redis = require('redis');
+var client = redis.createClient();
 
 var app = express();
 var port = process.env.PORT || 3000;
 
-importer(cans);
+app.set('client', client);
+
+var modules = require('./lib')(app);
+var importer = modules.importer;
+var opener = modules.opener;
+var slacker = modules.slack;
+var cans = require('./cans');
+
+
+// automatically import predefined phrases into redis
+modules.importer(cans);
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+// test route
 app.get('/', function (req, res, next) {
 	res.status(200).send('hello');
 });
 
 app.get('/cans', function (req, res, next) {
-	res.end();
-});
-
-app.get('/cans/:phrase_id', function (req, res, next) {
-	opener(req.params.phrase_id, function (error, reply) {
+	opener.all(function (error, reply) {
 		if (error) {
 			next(error);
 		} else {
@@ -30,14 +35,20 @@ app.get('/cans/:phrase_id', function (req, res, next) {
 	});
 });
 
-app.post('/slack', slack.respond);
-
-app.post('/cans', function (req, res, next) {
-	res.end();
+app.get('/cans/:phrase_id', function (req, res, next) {
+	opener.single(req.params.phrase_id, function (error, reply) {
+		if (error) {
+			next(error);
+		} else {
+			res.status(200).send(reply);
+		}
+	});
 });
 
+app.post('/slack', slacker);
+
 app.use(function (err, req, res, next) {
-	console.error(err.message);
+	console.error(err.stack);
 	res.status(400).send(err.message);
 });
 
