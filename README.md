@@ -1,7 +1,7 @@
 # slack-canned
 Canned phrases for Slack
 
-Displays predefined messages based on commands send to the server.
+Displays predefined messages based on commands send to the server. Requires Redis.
 
 Set an outgoing webhook to point to `/slack`. Setting the trigger word to `!` is recommended so that commands will look like `!command`.
 
