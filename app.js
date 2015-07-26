@@ -15,6 +15,10 @@ var opener = modules.opener;
 var slacker = modules.slack;
 var cans = require('./cans');
 
+client.on('error', function (err) {
+	console.error(err);
+});
+
 // automatically import predefined phrases into redis
 modules.importer(cans);
 
