@@ -4,5 +4,6 @@
 		"icon_emoji" : ":new_moon_with_face:",
 		"icon_url" : ""
 	},
-	"allowUserAdds": true
+	"allowUserAdds": true,
+	"listCommand": "help"
 }

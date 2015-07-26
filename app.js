@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var client = redis.createClient();
+var config = require('./config');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -13,7 +14,6 @@ var importer = modules.importer;
 var opener = modules.opener;
 var slacker = modules.slack;
 var cans = require('./cans');
-
 
 // automatically import predefined phrases into redis
 modules.importer(cans);
@@ -35,6 +35,16 @@ app.get('/cans', function (req, res, next) {
 	});
 });
 
+app.get('/cans/' + config.listCommand, function (req, res, next) {
+	opener.all(function (error, reply) {
+		if (error) {
+			next(error)
+		} else {
+			res.status(200).send(reply);
+		}
+	});
+});
+
 app.get('/cans/:phrase_id', function (req, res, next) {
 	opener.single(req.params.phrase_id, function (error, reply) {
 		if (error) {
@@ -46,6 +56,16 @@ app.get('/cans/:phrase_id', function (req, res, next) {
 });
 
 app.post('/slack', slacker);
+
+app.get('/dump', function (req, res, next) {
+	opener.dump(function (error, reply) {
+		if (error) {
+			next(error);
+		} else {
+			res.status(200).send((reply));
+		}
+	});
+});
 
 app.use(function (err, req, res, next) {
 	console.error(err.stack);
