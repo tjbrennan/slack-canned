@@ -5,5 +5,5 @@
 		"icon_url" : ""
 	},
 	"allowUserAdds": true,
-	"listCommand": "help"
+	"listCommand": "list"
 }
